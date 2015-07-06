@@ -1,6 +1,6 @@
 var requests = require('config/requests');
 var request = require('request');
-
+require('date-utils');
 
 module.exports = function(app) {
 
@@ -35,6 +35,23 @@ module.exports = function(app) {
 	});
 	
 	app.post('/send',function(req,res){
+ 	 
+    
+    var msg = req.body.msg;
+    var to_id =  req.body.to_id;
+    var from_id = req.body.from_id;
+    //var time_msg = req.body.time_msg;
+    var dt = new Date();
+    var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
+    var time_msg = "[" +  d + "]";
+    console.log(to_id+" : "+from_id+" :  "+msg);
+    
+    requests.send(from_id, to_id, msg, time_msg, function(found){
+      console.log(found);
+      
+      res.json(found);
+    });
+        /*
 		var fromu = req.body.from;
 		var fromn = req.body.fromn;
         	var to = req.body.to;
@@ -46,7 +63,7 @@ module.exports = function(app) {
 			console.log(found);
 			console.log('msg='+msg);
 			res.json(found);
-	});		
+	});		*/
 	});
 
 	app.post('/getuser',function(req,res){

@@ -38,6 +38,17 @@ module.exports = function(app) {
 	// 	requests
 
 	// });
+	app.post('/signup', function(req,res){
+		var token = req.body.token;
+		var userID = req.body.userID;
+		var userPW = req.body.userPW;
+
+		requests.signup(token, userID, userPW, function(found){
+			console.log(found);
+
+		});
+
+	});
 	app.post('/send',function(req,res){
  	 
     

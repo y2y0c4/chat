@@ -33,7 +33,11 @@ module.exports = function(app) {
 	// 		res.json(found);
 	// });		
 	// });
-	
+	// app.post('/e_room', function(req,res){
+	// 	var 
+	// 	requests
+
+	// });
 	app.post('/send',function(req,res){
  	 
     
@@ -44,7 +48,7 @@ module.exports = function(app) {
     var dt = new Date();
     var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
     var time_msg = "[" +  d + "]";
-    console.log(to_id+" : "+from_id+" :  "+msg);
+    console.log(req.body);
     
     requests.send(from_id, to_id, msg, time_msg, function(found){
       console.log(found);
@@ -66,12 +70,12 @@ module.exports = function(app) {
 	});		*/
 	});
 
-	app.post('/test',function(req,res){
-		var tmp = req.body;
-		console.log(tmp);
+	// app.post('/test',function(req,res){
+	// 	var tmp = req.body;
+	// 	console.log(tmp);
 		
 
-	})
+	// })
 	// app.post('/getuser',function(req,res){
 	// 	var mobno = req.body.mobno;
 			

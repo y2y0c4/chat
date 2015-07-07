@@ -22,17 +22,17 @@ module.exports = function(app) {
 	});*/
 
 
-	app.post('/login',function(req,res){
-		var name = req.body.name;
-       		var mobno = req.body.mobno;
-        	var reg_id = req.body.reg_id;
+	// app.post('/login',function(req,res){
+	// 	var name = req.body.name;
+ //       		var mobno = req.body.mobno;
+ //        	var reg_id = req.body.reg_id;
 	
 			
-		requests.login(name,mobno,reg_id,function (found) {
-			console.log(found);
-			res.json(found);
-	});		
-	});
+	// 	requests.login(name,mobno,reg_id,function (found) {
+	// 		console.log(found);
+	// 		res.json(found);
+	// });		
+	// });
 	
 	app.post('/send',function(req,res){
  	 
@@ -49,7 +49,7 @@ module.exports = function(app) {
     requests.send(from_id, to_id, msg, time_msg, function(found){
       console.log(found);
       
-      res.json(found);
+      //res.json(found);
     });
         /*
 		var fromu = req.body.from;
@@ -66,24 +66,30 @@ module.exports = function(app) {
 	});		*/
 	});
 
-	app.post('/getuser',function(req,res){
-		var mobno = req.body.mobno;
-			
-		requests.getuser(mobno,function (found) {
-			console.log(found);
-			res.json(found);
-	});		
-	});
+	app.post('/test',function(req,res){
+		var tmp = req.body;
+		console.log(tmp);
+		
 
-	app.post('/logout',function(req,res){
-		var mobno = req.body.mobno;
+	})
+	// app.post('/getuser',function(req,res){
+	// 	var mobno = req.body.mobno;
+			
+	// 	requests.getuser(mobno,function (found) {
+	// 		console.log(found);
+	// 		res.json(found);
+	// });		
+	// });
+
+	// app.post('/logout',function(req,res){
+	// 	var mobno = req.body.mobno;
 
 			
-		requests.removeuser(mobno,function (found) {
-			console.log(found);
-			res.json(found);
-	});		
-	});
+	// 	requests.removeuser(mobno,function (found) {
+	// 		console.log(found);
+	// 		res.json(found);
+	// });		
+	// });
 
 	
 };

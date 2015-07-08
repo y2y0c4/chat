@@ -11,38 +11,13 @@ module.exports = function(app) {
 		res.end("Node-Android-Chat-Project"); 
 	});
 
-	/*app.get('/test', function(req, res){
-	
-		requests.tmpfunc(function (found){
-			console.log("found : " + found+" : found");
-			console.log(found);
-			res.json(found);
-		});
-				
-	});*/
 
 
-	// app.post('/login',function(req,res){
-	// 	var name = req.body.name;
- //       		var mobno = req.body.mobno;
- //        	var reg_id = req.body.reg_id;
-	
-			
-	// 	requests.login(name,mobno,reg_id,function (found) {
-	// 		console.log(found);
-	// 		res.json(found);
-	// });		
-	// });
-	// app.post('/e_room', function(req,res){
-	// 	var 
-	// 	requests
-
-	// });
 	app.post('/signup', function(req,res){
+		console.log(req.body);
 		var token = req.body.token;
 		var userID = req.body.userID;
 		var userPW = req.body.userPW;
-
 		requests.signup(token, userID, userPW, function(found){
 			console.log(found);
 			res.json(found);
@@ -62,17 +37,17 @@ module.exports = function(app) {
 	});
 	app.post('/send',function(req,res){
  	 
-    
+    var no_log =  req.body.no_log; 
     var msg = req.body.msg;
     var to_id =  req.body.to_id;
     var from_id = req.body.from_id;
-    //var time_msg = req.body.time_msg;
-    var dt = new Date();
-    var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
-    var time_msg = "[" +  d + "]";
+    var time_msg = req.body.time_msg;
+   // var dt = new Date();
+   // var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
+   // var time_msg = "[" +  d + "]";
     console.log(req.body);
     
-    requests.send(from_id, to_id, msg, time_msg, function(found){
+    requests.send(no_log, from_id, msg, to_id, time_msg, function(found){
       console.log(found);
       
       //res.json(found);

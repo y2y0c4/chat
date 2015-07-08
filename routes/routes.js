@@ -28,7 +28,8 @@ module.exports = function(app) {
 	app.post('/loadmsg', function(req, res){
 		var index = req.body.index;
 		var no_log = req.body.no_log;
-		request.loadmsg(index, no_log, function(found){
+		console.log(req.body);
+		requests.loadmsg(index, no_log, function(found){
 			console.log(found);
 			res.json(found);
 

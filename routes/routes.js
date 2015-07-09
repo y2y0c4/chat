@@ -53,6 +53,17 @@ module.exports = function(app) {
         		res.json(found);
         	});
 
+	});	
+	
+	app.post('/makechat',function(req, res){
+		var time_start = req.body.time_start;
+		var partner = req.body.partner;
+		var client = req.body.client;
+
+		requests.send(time_start,partner,client, function(found){
+			console.log(found);
+			res.json(found);
+		});
 	});
 
 

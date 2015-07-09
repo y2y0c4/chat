@@ -18,7 +18,9 @@ module.exports = function(app) {
 		var token = req.body.token;
 		var userID = req.body.userID;
 		var userPW = req.body.userPW;
-		requests.signup(token, userID, userPW, function(found){
+		var name = req.body.name;
+		var sex = req.body.sex;
+		requests.signup(token, userID, userPW, name, sex, function(found){
 			console.log(found);
 			res.json(found);
 
@@ -38,62 +40,22 @@ module.exports = function(app) {
 	});
 	app.post('/send',function(req,res){
  	 
-    var no_log =  req.body.no_log; 
-    var msg = req.body.msg;
-    var to_id =  req.body.to_id;
-    var from_id = req.body.from_id;
-    var time_msg = req.body.time_msg;
-   // var dt = new Date();
-   // var d = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
-   // var time_msg = "[" +  d + "]";
-    console.log(req.body);
-    
-    requests.send(no_log, from_id, msg, to_id, time_msg, function(found){
-      console.log(found);
-      
-      //res.json(found);
-    });
-        /*
-		var fromu = req.body.from;
-		var fromn = req.body.fromn;
-        	var to = req.body.to;
-        	var msg = req.body.msg;
-
-			console.log('fromu = ' + fromu + ', fromn = ' + fromn);
-			console.log('to = ' + to);
-		requests.send(fromn,fromu,to,msg,function (found) {
+		var no_log =  req.body.no_log; 
+		var msg = req.body.msg;
+		var to_id =  req.body.to_id;
+		var from_id = req.body.from_id;
+		var time_msg = req.body.time_msg;
+		var device = req.body.device;
+		console.log(req.body);
+		    
+        	requests.send(no_log, from_id, msg, to_id, time_msg, device, function(found){
 			console.log(found);
-			console.log('msg='+msg);
-			res.json(found);
-	});		*/
+        		res.json(found);
+        	});
+
 	});
 
-	// app.post('/test',function(req,res){
-	// 	var tmp = req.body;
-	// 	console.log(tmp);
-		
 
-	// })
-	// app.post('/getuser',function(req,res){
-	// 	var mobno = req.body.mobno;
-	// 	console.log(mobno);	
-	// 	requests.getuser(mobno,function (found) {
-	// 		console.log(found);
-	// 		res.json(found);
-	// });		
-	// });
-
-	// app.post('/logout',function(req,res){
-	// 	var mobno = req.body.mobno;
-
-			
-	// 	requests.removeuser(mobno,function (found) {
-	// 		console.log(found);
-	// 		res.json(found);
-	// });		
-	// });
-
-	
 };
 
 

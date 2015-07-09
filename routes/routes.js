@@ -60,7 +60,7 @@ module.exports = function(app) {
 		var partner = req.body.partner;
 		var client = req.body.client;
 
-		requests.send(time_start,partner,client, function(found){
+		requests.makechat(time_start,partner,client, function(found){
 			console.log(found);
 			res.json(found);
 		});

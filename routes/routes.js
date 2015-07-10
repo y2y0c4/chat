@@ -7,12 +7,20 @@ module.exports = function(app) {
 
 
 	app.get('/', function(req, res) {
-
+	
 		res.end("Node-Android-Chat-Project"); 
 	});
 
-
-
+	app.post('/login', function(req, res){
+		var ID = req.body.ID;
+		var PW = req.body.PW;
+		
+		requests.login(ID, PW, function(found){
+			console.log(found);
+			res.json(found);
+		});
+	});
+	
 	app.post('/signup', function(req,res){
 		console.log(req.body);
 		var token = req.body.token;

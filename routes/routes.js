@@ -12,8 +12,8 @@ module.exports = function(app) {
 	});
 
 	app.post('/login', function(req, res){
-		var ID = req.body.ID;
-		var PW = req.body.PW;
+		var ID = req.body.userID;
+		var PW = req.body.userPW;
 		
 		requests.login(ID, PW, function(found){
 			console.log(found);

@@ -33,7 +33,7 @@ module.exports = function(app) {
 		var to_id =  req.body.to_id;   
 		var log_from = req.body.log_from;
 		var device = req.body.device;  
-		var time_msg = moment().tz("Asia/Seoul").format("YYYY-MM-DD A HH:mm");    
+		var time_msg = moment().tz("Asia/Seoul").format("YYYY-MM-DD A hh:mm");    
 
         requests.send(no_log, log_from, msg, to_id, time_msg, device, function(found){
 			console.log(found);

@@ -1,69 +1,65 @@
 var requests = require('config/requests');
 var request = require('request');
-require('date-utils');
+var moment = require('moment-timezone');
+
 
 module.exports = function(app) {
 
-
-
 	app.get('/', function(req, res) {
 	
-		res.end("Node-Android-Chat-Project"); 
+		res.end("Node-Mobile-Chat-Project"); 
 	});
 
-	app.post('/login', function(req, res){
-		var ID = req.body.userID;
-		var PW = req.body.userPW;
-		
-		requests.login(ID, PW, function(found){
-			console.log(found);
-			res.json(found);
-		});
-	});
-	
-	app.post('/signup', function(req,res){
-		console.log(req.body);
-		var token = req.body.token;
-		var userID = req.body.userID;
-		var userPW = req.body.userPW;
-		var name = req.body.name;
-		var sex = req.body.sex;
-		requests.signup(token, userID, userPW, name, sex, function(found){
-			console.log(found);
-			res.json(found);
-
-		});
-
-	});
 	app.post('/loadmsg', function(req, res){
+		console.log("**********************");
+		console.log("*  loadmsg   called  *");
+		console.log("**********************");
 		var index = req.body.index;
 		var no_log = req.body.no_log;
-		console.log(req.body);
-		requests.loadmsg(index, no_log, function(found){
+		var numOfMsg = req.body.numOfMsg;
+
+		requests.loadmsg(index, no_log, numOfMsg, function(found){
 			console.log(found);
 			res.json(found);
-
 		});
-
 	});
+
 	app.post('/send',function(req,res){
- 	 
+ 		console.log("**********************");
+		console.log("**   send  called   **");
+		console.log("**********************");
 		var no_log =  req.body.no_log; 
-		var msg = req.body.msg;
-		var to_id =  req.body.to_id;
-		var from_id = req.body.from_id;
-		var time_msg = req.body.time_msg;
-		var device = req.body.device;
-		console.log(req.body);
-		    
-        	requests.send(no_log, from_id, msg, to_id, time_msg, device, function(found){
+		var msg = req.body.log;		  	
+		var to_id =  req.body.to_id;   
+		var log_from = req.body.log_from;
+		var device = req.body.device;  
+		var time_msg = moment().tz("Asia/Seoul").format("YYYY-MM-DD A HH:mm");    
+
+        requests.send(no_log, log_from, msg, to_id, time_msg, device, function(found){
 			console.log(found);
         		res.json(found);
         	});
 
 	});	
-	
+
+	app.post('/makevideo',function(req, res){
+		console.log("**********************");
+		console.log("*  makevideo called  *");
+		console.log("**********************");
+		var no_room = req.body.no_room;
+		var to_id = req.body.to_id;
+		var no_log = req.body.no_log;
+		var facetime_no = req.body.facetime_no;
+
+		requests.makevideo(no_log, no_room, to_id, facetime_no, function(found){
+			console.log(found);
+			res.json(found);
+		});
+	});
 	app.post('/makechat',function(req, res){
+		console.log("**********************");
+		console.log("*  makechat  called  *");
+		console.log("**********************");
 		var time_start = req.body.time_start;
 		var partner = req.body.partner;
 		var client = req.body.client;
@@ -73,10 +69,5 @@ module.exports = function(app) {
 			res.json(found);
 		});
 	});
-
-
 };
-
-
-
 

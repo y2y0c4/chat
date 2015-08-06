@@ -14,7 +14,7 @@ module.exports = function(app) {
 	app.post('/:route*',functionn(req, res){
 		var rout = req.params.route;
 		if(req.params['0'] == ''){
-			if(rout =='videoAlam'){  //push Alam using jop schedule
+			if(rout =='schedulingPush'){  //push Alam using jop schedule
 				var y = req.body.year;
 				var m = req.body.month;
 				var d = req.body.day;
@@ -22,30 +22,11 @@ module.exports = function(app) {
 				var mi =req.body.min;
 				var id = req.body.id;
 				var time = new Date(y,m,d,h,mi);
-				res.json({'response':"response"});
-				console.log(time);
-				console.log(cron.scheduledJobs);
-				var scheduled = cron.scheduledJobs;
-				if(scheduled[id]!=null){
-					scheduled[id].cancel();
-					delete scheduled[id];
-					cron.scheduleJob(id, time, function(){
-						requests.videoAlam(function(found){
-							console.log(found);
-							res.json(found);
-						}
-						delete scheduled[id];
-					}.bind(null));
-				}
-				else{
-					cron.scheduleJob(id, time, function(){
-						requests.videoAlam(function(found){
-							console.log(found);
-							res.json(found);
-						}
-						delete scheduled[id];
-					}.bind(null));
-				}
+				res.json({'response':"res"});
+				requests.schedulingPush(id, time, function(found){
+					console.log(found);
+					res.json(found);
+				});
 			}
 			else if(rout == 'loadmsg')){ //load messages from DB
 				console.log("*******************");
@@ -104,7 +85,6 @@ module.exports = function(app) {
 					res.json(found);
 				});
 			}
-			/*
 			else if(rout == 'responseMsg'){  //if you send to somebody somebody request responseMsg and get message
 		 		console.log("*********************"); 
 		 		console.log("* responseMsgcalled *"); 
@@ -117,7 +97,7 @@ module.exports = function(app) {
 		 			res.json(found); 
 		 		}); 
 			}
-			*/
+			
 			else{
 				throw new Error('Wrong Access/Post');
 			}

@@ -6,6 +6,11 @@ require('date-utils');
 
 module.exports = function(app) {
 
+	/* If server is started, first read alam info and make schedule instance for alam */
+	requests.getAlamInfo(function(found){
+		console.log(found);
+	}); 
+
 	//prevent get method
 	app.get('*',function(req, res) {
 		throw new Error('Wrong Access/Get');

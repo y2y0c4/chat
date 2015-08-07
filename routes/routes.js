@@ -7,16 +7,17 @@ require('date-utils');
 module.exports = function(app) {
 
 	/* If server is started, first read alam info and make schedule instance for alam */
+/*
 	requests.getAlamInfo(function(found){
 		console.log(found);
 	}); 
-
+*/
 	//prevent get method
 	app.get('*',function(req, res) {
 		throw new Error('Wrong Access/Get');
 	});
 	//handleing post method
-	app.post('/:route*',functionn(req, res){
+	app.post('/:route*',function(req, res){
 		var rout = req.params.route;
 		if(req.params['0'] == ''){
 			if(rout =='schedulingPush'){  //push Alam using jop schedule
@@ -33,7 +34,7 @@ module.exports = function(app) {
 					res.json(found);
 				});
 			}
-			else if(rout == 'loadmsg')){ //load messages from DB
+			else if(rout == 'loadmsg'){ //load messages from DB
 				console.log("*******************");
 				console.log("* loadmsg  called *");
 				console.log("*******************");
